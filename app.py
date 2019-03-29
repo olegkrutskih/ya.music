@@ -2,6 +2,7 @@
 import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version('WebKit2', '4.0')
+import os, sys
 
 from gi.repository import GLib, Gtk, Gio, WebKit2
 import pyxhook
@@ -10,6 +11,8 @@ import pyxhook
 class Browser:
     def __init__(self):
         self.window = Gtk.Window()
+
+        self.window.set_icon_from_file(get_resource_path("icon.png"))
 
         self.window.set_size_request(1000, 600)
         self.window.set_default_size(800, 600)
@@ -113,6 +116,13 @@ class App:
             GLib.idle_add(self.browser.do_back)
         if event.ScanCode == 167:
             GLib.idle_add(self.browser.do_next)
+
+
+def get_resource_path(rel_path):
+    dir_of_py_file = os.path.dirname(__file__)
+    rel_path_to_resource = os.path.join(dir_of_py_file, rel_path)
+    abs_path_to_resource = os.path.abspath(rel_path_to_resource)
+    return abs_path_to_resource
 
 
 def main():
