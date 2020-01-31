@@ -9,6 +9,7 @@ import pyxhook
 
 
 class Browser:
+
     def __init__(self):
         self.window = Gtk.Window()
 
